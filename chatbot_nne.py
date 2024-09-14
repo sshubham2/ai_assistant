@@ -24,10 +24,10 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 
 if "st_openai_api_key" not in st.session_state:
-    st.session_state.st_openai_api_key = ''
+    st.session_state.st_openai_api_key = None
 
 if "st_anthropic_api_key" not in st.session_state:
-    st.session_state.st_anthropic_api_key = ''
+    st.session_state.st_anthropic_api_key = None
 
     
 with st.sidebar:
@@ -52,6 +52,7 @@ with st.sidebar:
     if selected_company=="Anthropic":
         model_options = ['Claude 3.5 Sonnet','Claude 3 Opus','Claude 3 Haiku']
         default_index = 0
+            
         selected_model = st.sidebar.selectbox("Choose model:", model_options,index=default_index)
         model_map = {
             'Claude 3.5 Sonnet':'claude-3-5-sonnet-20240620',
@@ -64,18 +65,17 @@ with st.sidebar:
     if selected_company=="OpenAI":
         if os.getenv('OPENAI_API_KEY') is None:
             st.session_state.st_openai_api_key = st.text_input("Enter API Key", type="password")
-            try:
-                llm = ChatOpenAI(
-                    model=selected_model,
-                    temperature=0.7,
-                    max_tokens=4096,
-                    timeout=None,
-                    max_retries=2,
-                    api_key=st.session_state.st_openai_api_key
-                )
-            except:
-                st.warning('Invalid API Key')
+            if not st.session_state.st_openai_api_key:
+                st.warning("Invalid API Key")
                 st.stop()
+            llm = ChatOpenAI(
+                model=selected_model,
+                temperature=0.7,
+                max_tokens=4096,
+                timeout=None,
+                max_retries=2,
+                api_key=st.session_state.st_openai_api_key
+            )
         else:
             llm = ChatOpenAI(
                 model=selected_model,
@@ -88,20 +88,19 @@ with st.sidebar:
     elif selected_company=="Anthropic":
         if os.getenv('ANTHROPIC_API_KEY') is None:
             st.session_state.st_anthropic_api_key = st.text_input("Enter API Key", type="password")
-            try:
-                llm = ChatAnthropic(
-                    model=selected_model,
-                    temperature=0.7,
-                    max_tokens=4096,
-                    timeout=None,
-                    max_retries=2,
-                    top_p=0.9,
-                    top_k=40,
-                    api_key=st.session_state.st_anthropic_api_key
-                )
-            except:
-                st.warning('Invalid API Key')
+            if not st.session_state.st_anthropic_api_key:
+                st.warning("Invalid API Key")
                 st.stop()
+            llm = ChatAnthropic(
+                model=selected_model,
+                temperature=0.7,
+                max_tokens=4096,
+                timeout=None,
+                max_retries=2,
+                top_p=0.9,
+                top_k=40,
+                api_key=st.session_state.st_anthropic_api_key
+            )
         else:
             llm = ChatAnthropic(
                 model=selected_model,
@@ -180,5 +179,9 @@ if prompt := st.chat_input(f"Hi! I am {selected_model}. How can I help you?"):
         
     with st.chat_message("assistant"):
         stream = conversational_rag_chain.stream({"messages":prompt}, config=config)
-        response = st.write_stream(stream)
+        try:
+            response = st.write_stream(stream)
+        except:
+            st.info("Invalid API Key? Please double check your API key.")
+            st.stop()
     st.session_state.messages.append({"role": "assistant", "content": response})

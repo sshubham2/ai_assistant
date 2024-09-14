@@ -64,19 +64,17 @@ with st.sidebar:
     if selected_company=="OpenAI":
         if os.getenv('OPENAI_API_KEY') is None:
             st.session_state.st_openai_api_key = st.text_input("Enter API Key", type="password")
-            try:
-                llm = ChatOpenAI(
-                    model=selected_model,
-                    temperature=0.7,
-                    max_tokens=4096,
-                    timeout=None,
-                    max_retries=2,
-                    api_key=st.session_state.st_openai_api_key
-                )
-            except:
-                st.warning('Invalid API key.')
+            if not st.session_state.st_openai_api_key:
+                st.warning("Invalid API Key")
                 st.stop()
-
+            llm = ChatOpenAI(
+                model=selected_model,
+                temperature=0.7,
+                max_tokens=4096,
+                timeout=None,
+                max_retries=2,
+                api_key=st.session_state.st_openai_api_key
+            )
         else:
             llm = ChatOpenAI(
                 model=selected_model,
@@ -86,23 +84,22 @@ with st.sidebar:
                 max_retries=2,
             )
     
-    elif selected_company=="Anthropic":
+    if selected_company=="Anthropic":
         if os.getenv('ANTHROPIC_API_KEY') is None:
             st.session_state.st_anthropic_api_key = st.text_input("Enter API Key", type="password")
-            try:
-                llm = ChatAnthropic(
-                    model=selected_model,
-                    temperature=0.7,
-                    max_tokens=4096,
-                    timeout=None,
-                    max_retries=2,
-                    top_p=0.9,
-                    top_k=40,
-                    api_key=st.session_state.st_anthropic_api_key
-                )
-            except:
-                st.warning('Invalid API key.')
+            if not st.session_state.st_anthropic_api_key:
+                st.warning("Invalid API Key")
                 st.stop()
+            llm = ChatAnthropic(
+                model=selected_model,
+                temperature=0.7,
+                max_tokens=4096,
+                timeout=None,
+                max_retries=2,
+                top_p=0.9,
+                top_k=40,
+                api_key=st.session_state.st_anthropic_api_key
+            )
         else:
             llm = ChatAnthropic(
                 model=selected_model,
@@ -161,12 +158,16 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-if prompt := st.chat_input(f"Hi! I am {selected_model}. How can I help you?"):
+if prompt := st.chat_input(f"Hi! I am {selected_model}. How can I help you?"):  
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
         
     with st.chat_message("assistant"):
         stream = conversational_rag_chain.stream({"messages":prompt}, config=config)
-        response = st.write_stream(stream)
+        try:
+            response = st.write_stream(stream)
+        except:
+            st.info("Invalid API Key? Please double check your API key.")
+            st.stop()
     st.session_state.messages.append({"role": "assistant", "content": response})
