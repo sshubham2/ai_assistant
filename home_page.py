@@ -124,7 +124,7 @@ with st.expander("What can I do?"):
 Feel free to ask for assistance with any specific task or inquiry you have!
 """)
     
-st.subheader("Natural Language Expert 💻")
+st.subheader("Natural Language Expert 💬")
 with st.expander("What can I do?"):
     st.markdown("""
         I can assist you in several language-related tasks, including:
@@ -206,7 +206,7 @@ st.write("""
 
 st.markdown('____')
 st.write('''
-         <p style='text-align: center;'>Create with 💕 using Streamlit</p>
+         <p style='text-align: center;'>Created with 💕 using Streamlit</p>
 ''', unsafe_allow_html=True)
 
 
