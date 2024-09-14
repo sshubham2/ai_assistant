@@ -1,0 +1,11 @@
+langchain-anthropic
+langchain-ollama
+ipykernel
+python-dotenv
+streamlit
+langchain_community
+transformers
+tqdm
+torch
+accelerate
+langchain-openai
