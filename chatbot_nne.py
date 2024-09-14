@@ -64,14 +64,18 @@ with st.sidebar:
     if selected_company=="OpenAI":
         if os.getenv('OPENAI_API_KEY') is None:
             st.session_state.st_openai_api_key = st.text_input("Enter API Key", type="password")
-            llm = ChatOpenAI(
-                model=selected_model,
-                temperature=0.7,
-                max_tokens=4096,
-                timeout=None,
-                max_retries=2,
-                api_key=st.session_state.st_openai_api_key
-            )
+            try:
+                llm = ChatOpenAI(
+                    model=selected_model,
+                    temperature=0.7,
+                    max_tokens=4096,
+                    timeout=None,
+                    max_retries=2,
+                    api_key=st.session_state.st_openai_api_key
+                )
+            except:
+                st.warning('Invalid API Key')
+                st.stop()
         else:
             llm = ChatOpenAI(
                 model=selected_model,
@@ -84,16 +88,20 @@ with st.sidebar:
     elif selected_company=="Anthropic":
         if os.getenv('ANTHROPIC_API_KEY') is None:
             st.session_state.st_anthropic_api_key = st.text_input("Enter API Key", type="password")
-            llm = ChatAnthropic(
-                model=selected_model,
-                temperature=0.7,
-                max_tokens=4096,
-                timeout=None,
-                max_retries=2,
-                top_p=0.9,
-                top_k=40,
-                api_key=st.session_state.st_anthropic_api_key
-            )
+            try:
+                llm = ChatAnthropic(
+                    model=selected_model,
+                    temperature=0.7,
+                    max_tokens=4096,
+                    timeout=None,
+                    max_retries=2,
+                    top_p=0.9,
+                    top_k=40,
+                    api_key=st.session_state.st_anthropic_api_key
+                )
+            except:
+                st.warning('Invalid API Key')
+                st.stop()
         else:
             llm = ChatAnthropic(
                 model=selected_model,
