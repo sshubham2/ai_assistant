@@ -9,3 +9,4 @@ tqdm
 torch
 accelerate
 langchain-openai
+streamlit_lottie
