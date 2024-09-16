@@ -1,2 +1,3 @@
 .env
 .devcontainer
+rag_app.code-workspace
