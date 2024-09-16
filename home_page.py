@@ -77,52 +77,41 @@ st.markdown("<h1 class='centered-header'>Available Modules</h1>", unsafe_allow_h
 
 st.subheader("Programming Language Expert 💻")
 with st.expander("What can I do?"):
-    st.write("""
-    I can assist you with a wide range of programming tasks and technical inquiries, including but not limited to:
+    st.markdown("""
+        I can assist you with a wide range of programming tasks and technical inquiries, including:
 
-        1. Writing Code:
-            I can help you write code in various programming languages
-            such as Python, Java, C++, JavaScript, and more.
-            
-        2. Debugging:
-            If you encounter errors or bugs in your code, I can help identify
-            and fix them to ensure your program runs smoothly.
-            
-        3. Optimizing Code:
-            I can suggest optimizations to improve the performance and efficiency
-            of your code.
-            
-        4. Explaining Concepts:
-            I can explain programming concepts, algorithms,and data structures
-            in a clearand understandable manner.
-            
-        5. Providing Examples:
-            I can provide code examples for specific tasks or functionalities
-            you want to implement.
-            
-        6. Technical Documentation:
-            I can create well-structured technical documentation that outlines
-            the design,functionality, and usage of code, including detailed
-            comments within the code itself.
-            
-        7. Code Review:
-            I can review your code to ensure it follows best practices,
-            is well-organized, and is easy to read and maintain.
+            1. Writing Code:  
+                Help you craft code in languages like Python, Java, C++, and JavaScript.
 
-        8. Assisting with Projects:
-            I can help you plan, design, and implement software projects,
-            from small scripts to larger applications.
+            2.Debugging:  
+                Identify and fix errors or bugs to ensure your program runs smoothly.
 
-        9. Learning Resources:
-            I can recommend resources for learning programming languages
-            and concepts, including tutorials, books, and online courses.
+            3. Optimizing Code:  
+                Suggest improvements to enhance performance and efficiency.
 
-        10. Answering Questions:
-            I can answer any questions you may have related to programming,
-            software development, and computer engineering.
+            4. Explaining Concepts:  
+                Clarify programming concepts, algorithms, and data structures in an understandable way.
 
-Feel free to ask for assistance with any specific task or inquiry you have!
-""")
+            5. Providing Examples:  
+                Offer practical code examples for specific tasks or functionalities.
+
+            6. Technical Documentation:  
+                Create well-structured documentation outlining design, functionality, and usage, with detailed in-code comments.
+
+            7. Code Review:  
+                Review your code to ensure it follows best practices and is easy to maintain.
+
+            8. Assisting with Projects:  
+                Help you plan, design, and implement software projects of any size.
+
+            9. Learning Resources:  
+                Recommend resources for learning programming languages, including tutorials and online courses.
+
+            10. Answering Questions:
+                Address any questions related to programming, software development, and computer engineering.
+
+    Feel free to ask for assistance with any specific task or inquiry you have!
+""",unsafe_allow_html=True)
     
 st.subheader("Natural Language Expert 💬")
 with st.expander("What can I do?"):
@@ -130,24 +119,19 @@ with st.expander("What can I do?"):
         I can assist you in several language-related tasks, including:
         
             1. Multilingual Translation:
-                I can translate text accurately between multiple languages,
-                taking cultural nuances and idiomatic expressions into account.
+                I can translate text accurately between multiple languages, taking cultural nuances and idiomatic expressions into account.
                 
             2. Content Summarization:
-                I can summarize complex information into concise overviews,
-                focusing on key points and main ideas.   
+                I can summarize complex information into concise overviews, focusing on key points and main ideas.   
                        
             3. Content Rewriting:
-                I can rewrite text according to your specifications, adapting tone,
-                style,and structure while maintaining coherence.  
+                I can rewrite text according to your specifications, adapting tone, style,and structure while maintaining coherence.  
                          
             4. Professional Email Composition:
-                I can help you compose clear and polite professional emails for various
-                contexts.
+                I can help you compose clear and polite professional emails for various contexts.
                            
             5. Resume Writing:
-                I can create well-structured resumes that highlight your skills
-                and experiences, tailored to specific job roles.
+                I can create well-structured resumes that highlight your skills and experiences, tailored to specific job roles.
 
         If you have a specific task in mind or need assistance with something else, feel free to let me know!
 """)
@@ -161,46 +145,47 @@ st.write("""
 """)
 # Expander for benefits of clearing chat history
 with st.expander("Why is this important?"):
-    st.write("""
-             
-    1. **Improved Contextual Understanding**: 
-       When starting a new question or topic, clearing chat history helps the model focus on the current context without being influenced by irrelevant previous conversations.
+    st.markdown("""
+        ```
+        1. Improved Contextual Understanding:
+            When starting a new question or topic, clearing chat history helps the model focus on the current context without being influenced by irrelevant
+            previous conversations.
        
-    2. **Enhanced Clarity**:
-       By removing unrelated history, users can ensure that their inquiries are clear and straightforward, which can lead to more accurate responses.
+        2. Enhanced Clarity:
+            By removing unrelated history, users can ensure that their inquiries are clear and straightforward, which can lead to more accurate responses.
        
-    3. **Reduced Cognitive Load**:
-       Users don’t need to sift through past messages to formulate their new questions, making the interaction more efficient and user-friendly.
+        3. Reduced Cognitive Load:
+            Users don’t need to sift through past messages to formulate their new questions, making the interaction more efficient and user-friendly.
        
-    4. **Better Performance**:
-       Clearing chat history can prevent the model from generating responses that might be influenced by older, irrelevant context, leading to higher quality outputs.
+        4. Better Performance:
+            Clearing chat history can prevent the model from generating responses that might be influenced by older, irrelevant context, leading to higher
+            quality outputs.
        
-    5. **Focused Interactions**:
-       Each interaction can be treated as a standalone session, allowing users to explore new topics without the baggage of previous discussions.
-       
+        5. Focused Interactions:
+            Each interaction can be treated as a standalone session, allowing users to explore new topics without the baggage of previous discussions.
     """)
     
 st.subheader("Tips for Better LLM Prompting")
-st.write("""
-1. **Be Specific**:
+st.info("""
+- **Be Specific**:
     Clearly articulate what you're asking. Instead of vague queries, provide context and specifics to guide the model's response.
 
-2. **Use Examples**:
+- **Use Examples**:
     Providing examples of what you're looking for can help the model understand your expectations better.
 
-3. **Ask Direct Questions**:
+- **Ask Direct Questions**:
     Formulate your prompts as direct questions to elicit more focused and concise answers.
 
-4. **Limit Complexity**:
+- **Limit Complexity**:
     Avoid overly complex questions that may confuse the model. Break down complex inquiries into simpler parts.
 
-5. **Iterate on Responses**:
+- **Iterate on Responses**:
     If the first response isn’t satisfactory, refine and rephrase your prompt based on the output to improve clarity and relevance.
 
-6. **Give Feedback**:
+- **Give Feedback**:
     If applicable, inform the model of what parts of its response were useful or not, which can help it generate better responses in the future.
 
-7. **Stay On Topic**:
+- **Stay On Topic**:
     For the best responses, keep your questions related to the current topic and avoid jumping between unrelated subjects.
 """)
 
